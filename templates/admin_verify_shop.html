@@ -1,0 +1,54 @@
+{%include 'adminheader.html'%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section id="hero" class="d-flex align-items-center" style="height: 1000px;   background: url('/static/assets/img/hero-img7.jpg'); background-size: cover; background-repeat: no-repeat;">
+        <div class="container"> 
+            <center>
+                <table  align="center" style="text-align: center; backdrop-filter: blur(80px);  margin-top: -250px;">
+
+        <tr>
+            <th>SL.NO</th>
+            <th>SHOP NAME</th>
+         <th>LOCATION</th>
+            <th>PHONE</th>
+            <th>EMAIL</th>
+        </tr>
+        {%for i in data['view']%}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{i['shop_name']}}</td>
+            <td><a class="btn btn-outline-dark" href="http://www.google.com/maps?q={{i['latitude'] }},{{ i['longitude'] }}">Location </a></td>
+            <td>{{i['phone']}}</td>
+            <td>{{i['email']}}</td>
+            <td><a href="?action=accept&id={{i['login_id']}}" class="btn btn-success">ACCEPT</a>
+                <a href="?action=reject&id={{i['login_id']}}" class=" btn btn-danger">REJECT</a>
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+</center>
+</div>
+    </section>
+    <style>
+        th{
+            padding: 20px;
+            color: rgb(0, 0, 0);
+            font-size: 25px;
+        }
+        td{
+            color: white;
+            padding: 15px;
+            
+        }
+    </style>
+
+
+
+{%include 'footer.html'%}

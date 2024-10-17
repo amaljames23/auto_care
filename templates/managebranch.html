@@ -1,0 +1,179 @@
+{%include 'adminheader.html'%}
+<!-- banner -->
+<section class="banner_main">
+  <div class="container-fluid">
+     <div class="row d_flex">
+        <div class="col-md-7">
+           <div class="text-bg">
+              <div class="padding_lert">
+                <h1 align="center" style="color: rgb(83, 83, 196);">BRANCH</h1>
+             
+
+    {% if data['upd'] %}
+    <form method="post">
+      <h2 align="center" style="color: blue;">UPDATE BRANCH</h2>
+<table align ="center" class="table table-stripped"
+            <tr>
+              <td>branch_name</td>
+            <td><input type="text"name="branch_name" value="{{data['upd'][0]['branch_name']}}"></td>
+            </tr>
+            <tr>
+              <td class="lbl">phone_number</td>
+            <td><input type="number"name="phone_number"value="{{data['upd'][0]['phone_number']}}"></td>
+            </tr>
+            <tr>
+            <td class="lbl">email</td>
+            <td><input type="email" name="email"value="{{data['upd'][0]['email']}}"></td>
+            </tr>
+            <tr>
+              <td class="lbl">place</td>
+            <td><input type="text" name="place"value="{{data['upd'][0]['place']}}"></td>
+            </tr>
+            <tr>
+              <td align="center"colspan="2"><input class="btn btn-success" type="submit"name="update"value="Update">
+            </tr>        
+            </table>
+            </form>
+            {% else %}
+            <h1 align="center">
+            <form method="POST" >
+              <h2 align="center" style="color: blue;">ADD BRANCH</h2>
+              <table align ="center" class="table table-stripped">
+                    <tr>
+                      <td class="lbl">BRANCH NAME</td>
+                      <td><input type="text" name="branch_name" id="branch_name" class="form-control"/>
+                    </tr>
+                    <tr>
+                    <td class="lbl">PHONE NUMBER</td>
+                    <td><input type="number" name="phone_number" id="phone_number"  class="form-control"/>
+                    </tr>
+                    <tr>
+                      <td class="lbl">EMAIL</td>
+                      <td><input type="email" name="email" id="email"  class="form-control"/>
+                    </tr>
+                    <tr>
+                    <td class="lbl">PLACE</td>
+                    <td><input type="place" name="place" id="place"  class="form-control"/>
+                    </tr>
+                    <tr>
+                      <td >LATITUDE</td>
+                      <td style="color: black;"><input type="text" name="latitude" id="slati"  class="form-control"></td>	
+                      
+                      <td><a onclick="myFunction();"  class="btn btn-success" required>View Map</a></td>
+                  </tr>
+                  <tr>
+                      <td >LONGITUDE</td>
+                      <td style="color: black;"><input type="text" name="longitude" id="elongi"  required  class="form-control"></td>	
+                  </tr>
+                    <tr>
+                    <td class="lbl">USERNAME</td>
+                    <td><input type="text" name="user_name" id="user_name" class="form-control"/>
+                    </tr>
+                    <tr>
+                    <td class="lbl">PASSWORD</td>
+                    <td><input type="password" name="password" id="password"  class="form-control"/>
+                    </tr>
+                    <tr>
+                      <td align="center" colspan="2"><input class="btn btn-success" type="submit" name="submit"value="submit"></td>
+                    </tr>
+                </table>
+                
+            </form>
+                {%endif%}
+                
+                <td>
+                  <div id="dvMap" style="width: 600px; height: 500px;"></div>
+                </td>
+
+                
+        
+      </div>
+    </div>
+    </div>
+    <div class="col-md-5 bah">
+    <div class="bann_img">
+       <!-- <figure><img src="/static/images/bann_img.png" alt="#"/></figure> -->
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+    <!-- end banner -->
+
+
+    <h1 align="center" style="color:blue;">MANAGE BRANCH</h1>
+                <table align ="center" class="table table-stripped">
+                  <tr>
+                    <th style="color: black;">SLNO</th>
+                    <th style="color: black;">BRANCH NAME</th>
+                    <th style="color: black;">PHONE NUMBER</th>
+                    <th style="color: black;">EMAIL</th>
+                    <th style="color: black;">PLACE</th>
+                    <th style="color: black;">LATITUDE</th>
+                    <th style="color: black;">LONGITUDE</th>
+                </tr>
+                {% for i in data['branch'] %}
+                <tr>
+                    <td >{{ loop.index }}</td>
+                    <td >{{ i['branch_name'] }}</td>
+                    <td > {{ i['phone_number'] }} </td>
+                    <td >{{ i['email'] }}</td>
+                    <td > {{ i['place'] }}</td>
+                    <td > {{ i['Latitude'] }}</td>
+                    <td > {{ i['Longitude'] }}</td>
+                    <td ><a href="?action=delete&did={{ i['branch_id'] }}" class="btn btn-primary" style="width: 100px;">Delete</a></td>
+                    <td ><a href="?action=update&did={{ i['branch_id'] }}" class="btn btn-primary" style="width: 100px;">Update</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+                
+
+<main id="main">
+
+               
+
+           
+
+            <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD3MPnSnyWwNmpnVEFkaddVvy_GWtxSejs&sensor=false"></script>
+            <script type="text/javascript">
+        // window.onload = function () {
+        function myFunction() {
+            var mapOptions = {
+                center: new google.maps.LatLng(9.9763482, 76.286272),
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            var latlngbounds = new google.maps.LatLngBounds();
+            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+            google.maps.event.addListener(map, 'click', function (e) {
+                alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
+                document.getElementById('slati').value = e.latLng.lat();
+                document.getElementById('elongi').value = e.latLng.lng();
+
+
+            });
+        }
+    </script>
+   
+   
+
+       {%include 'footer.html'%}
+       <style>
+        body {
+  background-color:white;
+}
+
+form {
+  display:block;
+  width:550px;
+  height:auto;
+  margin:60px auto;
+  border-radius:15px;
+  background-color:white;
+  font-size:16px;
+  font-family:'Arial';
+  color:black
+}
+</style>
+

@@ -1,0 +1,57 @@
+    {%include 'shopheader.html'%}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>  <section id="hero" class="d-flex align-items-center" style="height: 1000px;   background: url('/static/assets/img/hero-img7.jpg'); background-size: cover; background-repeat: no-repeat;">
+        <div class="container"> 
+            <center>
+        <form action="" method="post">
+            <table style="margin-top: -400px;">
+                <tr>
+                    <th style="font-size: 25px; color: rgb(0, 0, 0);">COMPLAINT</th>
+                    <td> <textarea name="cmp"  cols="16" rows="7" class="form-control" required="" pattern="[A-Za-z ]+" ></textarea></td>
+                </tr>
+                <tr>
+                    <td align="center" colspan="3" ><input type="submit" value="SEND" name="sed" class="btn btn-danger" style="margin-top: 30px;"></td>
+                </tr>
+            </table>
+        </form>
+    </center>
+</div>
+    </section>
+
+    <table  align="center" style="text-align: center; backdrop-filter: blur(80px);  margin-top: -500px;">
+
+            <tr>
+                <th>SL.NO</th>
+                <th>COMPLAINT</th>
+                <th>REPLY</th>
+                <th>DATE</th>
+            </tr>
+            {%for i in data['view']%}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{i['description']}}</td>
+                <td>{{i['reply']}}</td>
+                <td>{{i['date']}}</td>
+            </tr>
+    {%endfor%}
+        </table>
+        <style>
+            th{
+                padding: 20px;
+                color: rgb(0, 0, 0);
+                font-size: 25px;
+            }
+            td{
+                color: white;
+                padding: 15px;
+                
+            }
+        </style>
+    
+{%include 'footer.html'%}

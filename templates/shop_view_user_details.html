@@ -1,0 +1,49 @@
+{%include 'shopheader.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section id="hero" class="d-flex align-items-center" style="height: 1000px;   background: url('/static/assets/img/hero-img7.jpg'); background-size: cover; background-repeat: no-repeat;">
+        <div class="container"> 
+            <center>
+                <table  align="center" style="text-align: center; backdrop-filter: blur(80px);  margin-top: -250px;">
+
+    <tr>
+        <th>SL.NO</th>
+        <th>FIRST NAME</th>
+        <th>LAST NAME</th>
+        <th>PLACE</th>
+        <th>PHONE</th>
+        <th>EMAIL</th>
+    </tr>
+    {%for i in data['view']%}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{i['first_name']}}</td>
+        <td>{{i['last_name']}}</td>
+        <td>{{i['place']}}</td>
+        <td>{{i['phone']}}</td>
+        <td>{{i['email']}}</td>
+    </tr>
+    {%endfor%}
+</table>
+</center>
+</div>
+    </section>
+    <style>
+        th{
+            padding: 20px;
+            color: rgb(0, 0, 0);
+            font-size: 25px;
+        }
+        td{
+            color: white;
+            padding: 15px;
+            
+        }
+    </style>
+{%include 'footer.html'%}

@@ -1,0 +1,172 @@
+{%include 'shopheader.html'%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+{%if data['up']%}
+<section id="hero" class="d-flex align-items-center" style="height: 1000px;   background: url('/static/assets/img/hero-img7.jpg'); background-size: cover; background-repeat: no-repeat;">
+    <div class="container"> 
+        <center>
+<form action="" method="post" enctype="multipart/form-data">
+    <table style="margin-top: -300px;">
+        <tr>
+            <th>Spare part Name</th>
+            <td><input type="text" name="spare" value="{{data['up'][0]['spare_part_name']}}" class="form-control"></td>
+        </tr>
+        <tr>
+            <th>Quantity</th>
+            <td><input type="text" name="qua" value="{{data['up'][0]['quan_tity']}}" class="form-control"></td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td><input type="text" name="price" value="{{data['up'][0]['price']}}" class="form-control"></td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td><input type="text" name="des" value="{{data['up'][0]['description']}}" class="form-control"></td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td><input type="file" name="images" value="{{data['up']['image']}}" class="form-control"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="UPDATE" name="up" class="btn btn-info"></td>
+        </tr>
+
+    </table>
+   </form>
+</center>
+</div>
+    </section>
+
+{%else%}
+<section id="hero" class="d-flex align-items-center" style="height: 1000px;   background: url('/static/assets/img/hero-img7.jpg'); background-size: cover; background-repeat: no-repeat;">
+    <div class="container"> 
+        <center>
+   <form action="" method="post" enctype="multipart/form-data">
+    <table style="margin-top: -300px;">
+        <tr>
+            <th>Spare part Name</th>
+            <td><input type="text" name="spare" class="form-control"></td>
+        </tr>
+        <tr>
+            <th>Quantity</th>
+            <td><input type="text" name="qua" class="form-control"></td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td><input type="text" name="price" class="form-control"></td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td><input type="text" name="des" class="form-control"></td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td><input type="file" name="images" class="form-control"></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="2"><input type="submit" value="ADD" name="add" class="btn btn-success"></td>
+        </tr>
+
+    </table>
+   </form>
+</center>
+</div>
+    </section>
+    
+   <table  class="table table-striped">
+    <tr>
+        <th>SL.NO</th>
+        <th>Spare Parts Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Vehicle Name</th>
+        <th>Image</th>
+    </tr>
+
+    {%for i in data['view']%}
+    
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{i['spare_part_name']}}</td>
+        <td>{{i['quan_tity']}}</td>
+        <td>{{i['price']}}</td>
+        <td>{{i['description']}}</td>
+        <td>{{i['type_name']}}</td>
+        <td><img src="{{i['image']}}" alt="images" height="200px" width="200px"></td>
+        <td><a href="?action=delete&id={{i['shop_id']}}" class="btn btn-danger">DELETE</a>
+        <a href="?action=update&id={{i['shop_id']}}" class="btn btn-primary">UPDATE</a></td>
+    </tr>
+    {%endfor%}
+   </table>
+{%endif%}
+
+</center>
+</div>
+    </section>
+    <style>
+        /* Style the table */
+        .table {
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        /* Style the table header */
+        .table th {
+            background-color: #007BFF;
+            color: #fff;
+            text-align: left;
+            padding: 12px;
+        }
+
+        /* Style the table rows */
+        .table tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Style the table data cells */
+        .table td {
+            padding: 12px;
+        }
+
+        /* Style the table alternate rows with a different background color */
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Style the table image */
+        .table img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Style the delete and update links */
+        .table a {
+            margin-right: 5px;
+            text-decoration: none;
+            
+        }
+    </style>
+
+    <style>
+        th{
+            padding: 15px;
+            color: rgb(0, 0, 0);
+            font-size: 25px;
+        }
+        td{
+            color: rgb(0, 0, 0);
+            padding: 15px;
+            
+        }
+    </style>
+{%include 'footer.html'%}

@@ -1,0 +1,39 @@
+{%include 'shopheader.html'%}
+
+
+
+
+<section id="hero" class="d-flex align-items-center" style="height: 1000px;   background: url('/static/assets/img/hero-img7.jpg'); background-size: cover; background-repeat: no-repeat;">
+    <div class="container"> 
+        <center>
+            <table   align="center" style="text-align: center; backdrop-filter: blur(100px); margin-top: -250px;">
+
+    <tr>
+        <th>SL.NO</th>
+        <th>TYPE NAME</th>
+    </tr>
+    {%for i in data['view']%}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{i['type_name']}}</td>
+        <td><a href="/manage_spareparts?id={{i['vehicle_type_id']}}" class="btn btn-info">Manage spare parts</a></td>
+    </tr>
+    
+    {%endfor%}
+</table>
+</center>
+</div>
+    </section>
+    <style>
+        th{
+            padding: 15px;
+            color: rgb(0, 0, 0);
+            font-size: 25px;
+        }
+        td{
+            color: white;
+            padding: 15px;
+            
+        }
+    </style>
+{%include 'footer.html'%}

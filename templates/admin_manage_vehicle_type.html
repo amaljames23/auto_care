@@ -1,0 +1,83 @@
+{%include 'adminheader.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {%if data['up']%}
+
+    <section id="hero" class="d-flex align-items-center" style="height: 1000px;   background: url('/static/assets/img/hero-img7.jpg'); background-size: cover; background-repeat: no-repeat;">
+        <div class="container"> 
+            <center>
+    <form action="" method="post" style="margin-top: -300px;">
+        <table>
+            <tr>
+                <th style="font-size: 25px;">TYPE NAME</th>
+                <td><input type="text" name="tyname" value="{{data['up'][0]['type_name']}}" class="form-control"  required="" pattern="[A-Za-z ]+" ></td>
+            </tr>
+            <tr>
+            <td align="center" colspan="3"><input type="submit" value="UPDATE" name="up" class="btn btn-success"></td>
+            </tr>
+        </table>
+    </form>
+    {%else%}
+
+
+    <section id="hero" class="d-flex align-items-center" style="height: 1000px;   background: url('/static/assets/img/hero-img7.jpg'); background-size: cover; background-repeat: no-repeat;">
+        <div class="container"> 
+            <center>
+    <form action="" method="post" style="margin-top: -300px;">
+        <table>
+            <tr>
+                <th style="font-size: 25px;">TYPE NAME</th>
+                <td><input type="text" name="tyname" class="form-control"   pattern="[A-Za-z ]+"  required=""></td>
+            </tr>
+            <tr>
+            <td align="center" colspan="3"><input type="submit" value="ADD" name="add" class="btn btn-warning"></td>
+            </tr>
+        </table>
+    </form>
+
+
+
+    <table  align="center" style="text-align: center; backdrop-filter: blur(30px);  margin-top: 20px;">
+
+    <tr>
+        <th>SL.NO</th>
+        <th>TYPE NAME</th>
+    </tr>
+    {%for i in data['view']%}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{i['type_name']}}</td>
+        <td><a href="?action=update&id={{i['vehicle_type_id']}}" class="btn btn-info">UPDATE</a>
+        <a href="?action=delete&id={{i['vehicle_type_id']}}" class="btn btn-danger">DELETE</a></td>
+    </tr>
+    
+    {%endfor%}
+</table>
+{%endif%}
+
+</center>
+</div>
+    </section>
+
+    <style>
+        th{
+            padding: 15px;  
+            color: black;
+            font-size: 25px;
+        }
+        td{
+            padding: 15px;  
+            color: rgb(233, 231, 231);
+            font-size: 20px;
+        }
+
+    </style>
+
+
+{%include 'footer.html'%}

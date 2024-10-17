@@ -1,0 +1,151 @@
+{%include 'adminheader.html'%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {%if data['up']%}
+    <section id="hero" class="d-flex align-items-center" style="height: 1000px;   background: url('/static/assets/img/hero-img7.jpg'); background-size: cover; background-repeat: no-repeat;">
+        <div class="container"> 
+            <center>
+    <form action="" method="post">
+        <table style="margin-top: 50px;">
+            <tr>
+                <th style="font-size: 25px; color: rgb(0, 0, 0);">NAME</th>
+                <td><input type="text" name="name" value="{{data['up'][0]['name']}}" class="form-control" required=""></td>
+            </tr>
+            <tr>
+                <th style="font-size: 25px; color: rgb(0, 0, 0);">LATITUDE</th>
+                <td style="color: black;"><input type="text" name="latitude" id="slati"  class="form-control" value="{{data['up'][0]['latitude']}}"></td>	
+                
+                <td><a onclick="myFunction();"  class="btn btn-success" required>View Map</a></td>
+            </tr>
+            <tr>
+                <th style="font-size: 25px; color: rgb(0, 0, 0);" >LONGITUDE</th>
+                <td style="color: black;"><input type="text" name="longitude" id="elongi"  required  class="form-control" value="{{data['up'][0]['longitude']}}"></td>	
+            </tr>
+            <tr>
+                <th style="font-size: 25px; color: rgb(0, 0, 0);">PHONE</th>
+                <td><input type="text" name="ph" value="{{data['up'][0]['phone']}}" class="form-control" required="" pattern="[0-9]{10}" ></td>
+            </tr>
+            <tr>
+                <th style="font-size: 25px; color: rgb(0, 0, 0);">EMAIL</th>
+                <td><input type="email" name="mail" value="{{data['up'][0]['email']}}" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required=""></td>
+            </tr>
+            <tr>
+                <td align="center" colspan="3"><input type="submit" value="update" name="up" class="btn btn-warning"></td>
+            </tr>
+
+        </table>
+    </form>
+
+    {%else%}
+    <section id="hero" class="d-flex align-items-center" style="height: 1000px;   background: url('/static/assets/img/hero-img7.jpg'); background-size: cover; background-repeat: no-repeat;">
+        <div class="container"> 
+            <center>
+<form action="" method="post" style="margin-top: 80px;">
+    <table style="margin-top: 100px;">
+        
+        <tr>
+            <th style="font-size: 25px; color: rgb(0, 0, 0);">NAME</th>
+            <td><input type="text" name="name"  class="form-control" required=""></td>
+        </tr>
+
+        <tr>
+            <th style="font-size: 25px; color: rgb(0, 0, 0);" >LATITUDE</th>
+            <td style="color: black;"><input type="text" name="latitude" id="slati"  class="form-control"></td>	
+            
+            <td><a onclick="myFunction();"  class="btn btn-success" required>View Map</a></td>
+        </tr>
+        <tr>
+            <th style="font-size: 25px; color: rgb(0, 0, 0);" >LONGITUDE</th>
+            <td style="color: black;"><input type="text" name="longitude" id="elongi"  required  class="form-control"></td>	
+        </tr>
+        <tr>
+            <th style="font-size: 25px; color: rgb(0, 0, 0);">PHONE</th>
+            <td><input type="text" name="ph"  class="form-control" pattern="[0-9]{10}" required=""></td>
+        </tr>
+        <tr>
+            <th style="font-size: 25px; color: rgb(0, 0, 0);">EMAIL</th>
+            <td><input type="email" name="mail" class="form-control"  required="" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="3"><input type="submit" value="REGISTER" name="reg" class="btn btn-info"></td>
+        </tr>
+    </table>
+</form>
+
+
+<table  align="center" style="text-align: center; backdrop-filter: blur(30px);  margin-top: 20px;">
+
+    <tr>
+        <th>SL.N0</th>
+        <th>NAME</th>
+        <th>LOCATION</th>
+        <th>PHONE</th>
+        <th>EMAIL</th>
+    </tr>
+    {%for i in data['view']%}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{i['name']}}</td>
+				<td><a class="btn btn-outline-dark" href="http://www.google.com/maps?q={{i['latitude'] }},{{ i['longitude'] }}">Location </a></td>
+       
+        <td>{{i['phone']}}</td>
+        <td>{{i['email']}}</td>
+        <td><a href="?action=update&id={{i['service_center_id']}}" class="btn btn-success">UPDATE</a>
+        <a href="?action=delete&id={{i['service_center_id']}}" class="btn btn-danger">DELETE</a></td>
+    </tr>
+    {%endfor%}
+</table>
+{%endif%}
+
+<td>
+    <div id="dvMap" style="width: 600px; height: 500px;"></div>
+  </td>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD3MPnSnyWwNmpnVEFkaddVvy_GWtxSejs&sensor=false"></script>
+<script type="text/javascript">
+// window.onload = function () {
+function myFunction() {
+var mapOptions = {
+    center: new google.maps.LatLng(9.9763482, 76.286272),
+    zoom: 14,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+var infoWindow = new google.maps.InfoWindow();
+var latlngbounds = new google.maps.LatLngBounds();
+var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+google.maps.event.addListener(map, 'click', function (e) {
+    alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
+    document.getElementById('slati').value = e.latLng.lat();
+    document.getElementById('elongi').value = e.latLng.lng();
+
+
+});
+}
+</script>
+</center>
+</div>
+    </section>
+
+    <style>
+        th{
+            padding: 15px;  
+            color: black;
+            font-size: 25px;
+        }
+        td{
+            padding: 15px;  
+            color: rgb(233, 231, 231);
+            font-size: 20px;
+        }
+
+    </style>
+
+
+{%include 'footer.html'%}

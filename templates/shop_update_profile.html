@@ -1,0 +1,87 @@
+{%include 'shopheader.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section id="hero" class="d-flex align-items-center" style="height: 1000px;   background: url('/static/assets/img/hero-img6.jpg'); background-size: cover; background-repeat: no-repeat;">
+    <div class="container"> 
+        <center>
+            
+    {%if data['up']%}
+    <form action="" method="post">
+        <table  align="center" style="text-align: center; backdrop-filter: blur(30px);  margin-top: -250px;">
+
+            <tr>
+                <th  style="font-size: 25px; color: rgb(255, 255, 255);">SHOP NAME</th>
+                <td><input type="text" name="sname" class="form-control" value="{{data['view'][0]['shop_name']}}"></td>
+            </tr>
+            <tr>
+                <th style="font-size: 25px; color: rgb(255, 255, 255);">LATITUDE</th>
+                <td style="color: black;"><input type="text" name="latitude" id="slati"  class="form-control" value="{{data['view'][0]['latitude']}}"></td>	
+                <td><a onclick="myFunction();"  class="btn btn-danger" required>View Map</a></td>
+            </tr>
+            <tr>
+                <th style="font-size: 25px; color: rgb(255, 255, 255);">LONGITUDE</th>
+                <td style="color: black;"><input type="text" name="longitude" id="elongi"  required  class="form-control" value="{{data['view'][0]['longitude']}}"></td>	
+            </tr>
+            <tr>
+                <th style="font-size: 25px; color: rgb(255, 255, 255);">PHONE</th>
+                <td><input type="text" name="ph" class="form-control" value="{{data['view'][0]['phone']}}" pattern="(\+91[\\-\\s]?)?[0]?[789]\d{9}" required=""></td>
+            </tr>
+            <tr>
+                <th style="font-size: 25px; color: rgb(255, 255, 255);">EMAIL</th>
+                <td><input type="email" name="mail" class="form-control" value="{{data['view'][0]['email']}}" required="" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"></td>
+            </tr>
+            <tr>
+                <td align="center" colspan="3"><input type="submit" value="UPDATE" name="up" class="btn btn-success"></td>
+            </tr>
+        </table>
+    </form>
+</center>
+</div>
+    </section>
+    {%else%}
+  
+        <table   align="center" style="text-align: center; backdrop-filter: blur(100px); margin-top: -300px;">
+    <tr>
+        <th>SL.NO</th>
+        <th>SHOP NAME</th>
+        <th>LATITUDE</th>
+        <th>LONGITUDE</th>
+        <th>PHONE</th>
+        <th>EMAIL</th>
+    </tr>
+    {%for i in data['view']%}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{i['shop_name']}}</td>
+        <td>{{i['latitude']}}</td>
+        <td>{{i['longitude']}}</td>
+        <td>{{i['phone']}}</td>
+        <td>{{i['email']}}</td>
+        <td><a href="?action=update&id={{i['login_id']}}" class="btn btn-warning">UPDATE PROFILE</a></td>
+    </tr>
+    {%endfor%}
+</table>
+{%endif%}
+</center>
+</div>
+    </section>
+    <style>
+        th{
+            padding: 20px;
+            color: rgb(0, 0, 0);
+            font-size: 25px;
+        }
+        td{
+            color: white;
+            padding: 15px;
+            
+        }
+    </style>
+
+{%include 'footer.html'%}

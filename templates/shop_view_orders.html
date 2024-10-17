@@ -1,0 +1,54 @@
+{%include 'shopheader.html'%}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section id="hero" class="d-flex align-items-center" style="height: 100%;   background: url('/static/assets/img/hero-img7.jpg'); background-size: cover; background-repeat: no-repeat;">
+        <div class="container"> 
+            <center>
+                <table  align="center" style="text-align: center; backdrop-filter: blur(800px);  margin-top: 100px;">
+    <tr>
+        <th>SL.NO</th>
+        <th>TOTAL AMOUNT</th>
+        <th>DATE</th>
+        <th>STATUS</th>
+        <th>QUANTITY</th>
+        <th>AMOUNT</th>
+    </tr>
+    {%for i in data['view']%}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{i['total_amount']}}</td>
+        <td>{{i['date']}}</td>
+        <td>{{i['status']}}</td>
+        <td>{{i['quantity']}}</td>
+        <td>{{i['amount']}}</td>
+        <td><a href="/viewuserdetails?id={{i['user_id']}}" class="btn btn-primary">View User Details</a>
+        <a href="/viewpayments?id={{i['order_master_id']}}" class=" btn btn-danger">View Payment</a></td>
+    </tr>
+    {%endfor%}
+</table>
+</center>
+
+</div>
+    </section>
+    <style>
+        th{
+            padding: 20px;
+            color: rgb(0, 0, 0);
+            font-size: 25px;
+        }
+        td{
+            color: white;
+            padding: 15px;
+            
+        }
+    </style>
+ 
+ {%include 'footer.html'%}
